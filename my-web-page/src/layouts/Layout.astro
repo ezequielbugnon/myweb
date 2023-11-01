@@ -1,9 +1,13 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 interface Props {
 	title: string;
 }
 
 const { title } = Astro.props;
+
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1); // remove the first "/"
 ---
 
 <!doctype html>
@@ -15,27 +19,38 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<ViewTransitions />
 	</head>
 	<body>
+		<nav>
+			<ul>
+				<li><a href="/" class={currentPath === ''?'active-link': ''}>MENU</a></li>
+				<li><a href="/info" class={currentPath === 'info'?'active-link': ''}>INFO</a></li>
+				<li><a href="/projects" class={currentPath === 'projects'?'active-link': ''}>PROJECTS</a></li>
+			</ul>
+
+		</nav>
+		<div class="background-red">
+		</div>
 		<slot />
 	</body>
 </html>
 <style is:global>
 	:root {
 		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
+		--main-color: rgba(252, 245, 74, 1);
+		--wh-color: rgba(255, 255, 255, 1);
+		--v-blue: rgba(0, 13, 128, 1);
+		--v-red: rgba(181, 0, 0, 1)
 	}
 	html {
 		font-family: system-ui, sans-serif;
-		background: #13151a;
-		background-size: 224px;
+		background-color: var(--main-color);
+	
+	}
+	body{
+		margin-left: 0;
+		padding-left: 0;
 	}
 	code {
 		font-family:
@@ -47,5 +62,32 @@ const { title } = Astro.props;
 			Bitstream Vera Sans Mono,
 			Courier New,
 			monospace;
+	}
+	nav {
+		width: 100%;
+	}
+	ul {
+		display: flex;
+		justify-content: end;
+		list-style: none;
+	}
+	li{
+		padding-right: 15px;
+		font-weight: bold;
+	}
+	.active-link  {
+		color: var(--wh-color);
+	}
+	li a {
+		color: var(--v-blue);
+		text-decoration: none;
+	}
+	.background-red{
+		height: 70vh;
+		width: 100%;
+		background-color:var(--v-red);
+		position: absolute;
+		bottom: 0;
+		z-index: -1;
 	}
 </style>
