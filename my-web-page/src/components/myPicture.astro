@@ -35,5 +35,17 @@ const desktopImg = await getImage({
 <style>
     .exclusion-image{
         mix-blend-mode: exclusion; 
+        animation: .4s fadeIn ease-out;
     }
+    
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+            transform: scale(0)
+		}
+		100% {
+			opacity: 100%;
+            transform: scale(1);
+		}
+	}
 </style>
