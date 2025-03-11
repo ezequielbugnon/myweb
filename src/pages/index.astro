@@ -1,6 +1,6 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import HamburgerMenu from '../components/HamburgerMenu.jsx';
+import HamburgerMenu from '../components/HamburgerMenu.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import "../styles/global.css";
 ---
@@ -15,6 +15,9 @@ import "../styles/global.css";
 
 			<HamburgerMenu />
 			<h1> Bem-vindo ao Cores da Natureza! </h1>
+			<article>
+				<p>Este blog nasce do nosso desejo de compartilhar práticas e reflexões que trazem equilíbrio, leveza e bem-estar à nossa vida. Acreditamos que cada pequeno passo em direção à saúde e à sustentabilidade colore o mundo ao nosso redor.</p>
+			</article>
 		</main>
 	</body>
 </html>

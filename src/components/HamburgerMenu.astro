@@ -1,0 +1,47 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<header>
+  <nav >
+    <div class="block md:hidden">
+      <button id="menu-button">
+        <Icon name="burger" />
+      </button>
+    </div>
+    <ul id="menu" class="flex flex-col md:flex-row justify-end items-center">
+      <li class="px-3"><a href="#">MENU</a></li>
+      <li class="px-3"><a href="#">BLOG</a></li>
+      <li class="px-3"><a href="#">SOBRE NOS</a></li>
+    </ul>
+  </nav>
+</header>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuButton = document.querySelector("#menu-button");
+    const menu = document.querySelector("#menu");
+
+    const handleMenuVisibility = () => {
+      if (menuButton && menu) {
+        if (window.innerWidth < 768 ) {
+          menu.classList.add("hidden");
+        } else {
+          menu.classList.remove("hidden");
+        }
+      }
+    };
+
+    handleMenuVisibility();
+
+    window.addEventListener("resize", handleMenuVisibility);
+
+    if (menuButton && menu) {
+      menuButton.addEventListener("click", () => {
+        if (window.innerWidth < 768) {
+          menu.classList.toggle("hidden");
+        }
+      });
+    }
+  });
+</script>
+
